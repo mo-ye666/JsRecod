@@ -30,3 +30,32 @@ $.ajax({
     newPromise
         .then()
 ```
+
+## 简单使用promise封装原生ajax请求
+```js
+function Ajaxpromise(url,method,data) {
+    return new Promise((reslove,reject) => {
+        let xhr =new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4 && xhr.status ==200) {
+                resolve(request.response)
+            }else {
+                reject(request.status)
+            }
+        }
+        if(method == 'get') {
+            let add= [];
+            for(let key in data) {
+                arr.push(key + '=' + data[key]);
+            }
+            let getData = arr.join('&');
+            xhr.open('GET',url + '?'+getData,true);
+        }
+        if(method == 'post') {
+            xhr.open('POST',url,true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
+            xhr.send(data);
+        }
+    })
+}
+```
