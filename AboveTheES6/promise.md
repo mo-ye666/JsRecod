@@ -59,3 +59,6 @@ function Ajaxpromise(url,method,data) {
     })
 }
 ```
+## promise解析
+
+promise
