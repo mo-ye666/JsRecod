@@ -1,12 +1,13 @@
-原文地址[嗨，你真的懂this吗？](https://juejin.im/post/5c96d0c751882511c832ff7b)
+####原文地址
+[嗨，你真的懂this吗？](https://juejin.im/post/5c96d0c751882511c832ff7b)
 
-####this的绑定规则
+#### this的绑定规则
 1.默认绑定
 2.隐式绑定
 3.硬绑定
 4.new绑定
 
-####默认绑定
+#### 默认绑定
 在不能应用其他绑定规则的时候使用默认规则，通常是独立函数调用
 ```js
 function sayHi() {
@@ -16,7 +17,7 @@ var name = 'Ybettelau';
 sayHi();
 ```
 
-####隐式绑定
+#### 隐式绑定
 函数调用实在某个对象上触发的，既调用位置上存在上下文对象。形式xxx.function()
 ```js
 fucntion sayHi() {
@@ -94,7 +95,7 @@ setTimeout(fn,delay) {
 },相当于将person2.sayHi赋值给了一个变量，最后再执行这个变量，最后sayHi中的this显然和person2九没了关系
 第三个结果也在setTimeout中，但执行的是person2.sayHi(),使用的是隐式绑定，因此这是this指向的是person2，跟当前作用域没有任何关系。
 
-####显式绑定
+#### 显式绑定
 显示绑定就是通过call，apply，bind的方式，显示的指向this所指向的对象。
 cally，apply和bind的第一个参数，就是对应函数的this所指向的对象。call和apply的作用一样，只是传参方式不同。call和apply都执行对应的函数，而bind方式不会。
 
@@ -146,7 +147,7 @@ Hi.call(person,person.sayHi); /**hello,Yvettelau**;
 ```
 因为person被绑定到了Hi函数中的this上，fn又将这个对象绑定给了sayHi的函数。此时sayHi中的this指向的就是person对象。
 
-####new绑定
+#### new绑定
 javascript没有类，在JavaScript中，构造函数只是使用new操作符时被调用的函数，这些函数和普通的函数并没有什么不同，他不属于某个类，也不可能实例化出一个类。任何一个函数都可以使用new来调用，因此其实并不存在构造函数，而只有对于函数的'构造调用'。
     使用new来调用函数，会自动执行下面的操作：
 1.创建一个新对象
@@ -163,10 +164,10 @@ console.log('Hello',Hi.name) /**hello,Yevtte**/
 ```
 因为在var Hi = new sayHi('Yevtte');这一步，会将sayHi中的this绑定到Hi对象上。
 
-####绑定优先级
+#### 绑定优先级
 new绑定>显示绑定>隐式绑定>默认绑定
 
-####绑定例外
+#### 绑定例外
 如果我们将null或者undefined作为this的绑定对象传入call、apply或者bind，这些值在调用时被忽略，实际应用的默认绑定规则
 ```js
 function sayHi(){
