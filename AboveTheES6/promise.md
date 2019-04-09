@@ -58,7 +58,9 @@ function Ajaxpromise(url,method,data) {
         }
     })
 }
+
 ```
 ## promise解析
 
-promise
+####promise和函数式编程
+promise源自于函数式编程的Monad
