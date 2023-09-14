@@ -96,9 +96,16 @@ promise的then方法接受两个参数：
 * 当promise成功执行时，所有onFulfilled需按照注册顺序依次回调
 * 当promise被拒接执行时，所有的onRejected需按照其注册顺序依次回调
 
+```js
+const EMUN = {
+	PENDING = 'pending',
+	FULFILLED = 'fulfilled',
+	REJECTED = 'rejected'
+}
 
-
-
-
+const resolvePromise = (x,promise2,reslove,reject) => {
+	if(x === promise2) reject(new TypeError('类型错误'))
+}
+```
 
 

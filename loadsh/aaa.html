@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="button">测试</button>
+    <script>
+        // function debounce(func, wait, immediate) {
+        //     let timer = null;
+        //     return function() {
+        //         const context = this;
+        //         const args = arguments;
+        //         //immediate => 想要执行频繁点击的第一次 && !timer 即第一次未设置定时器才为true
+        //         let now = immediate && !timer;
+        //         clearTimeout(timer);
+        //         timer = setTimeout(() => {
+        //             //每一次定时器能执行时手动将timer恢复成初始状态
+        //             timer = null;
+        //             //既然要执行第一次，那么就不要让wait时间之后再执行一次函数,这里用!immediate是因为最后一次操作的timer是不会被清除掉的
+        //             !immediate ? func.call(context,args) : null;
+        //         }, wait);
+
+        //         //执行频繁点击第一次
+        //         now ? func.call(context,args): null;
+        //     };
+        // }
+        // const button = document.getElementById('button');
+        // button.addEventListener('click', debounce(() =>{
+        //     console.log('Button clicked!'); // 用户连续点击按钮时，这里只会在等待时间过后打印一次
+        // }, 2000,true));
+
+        // function throttle(func,wait) {
+        //     let timer = null,
+        //         pervious = 0;
+        //     return function() {
+        //         let now = new Date(),
+        //             remaining = wait - (now - pervious);
+        //         const context = this;
+        //         const args = arguments;
+                    
+        //     }
+        // }
+        Array.prototype.myForEach = function(callback, thisArg) {
+            if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function');
+            
+            if (thisArg) {
+                callback = callback.bind(thisArg);
+            }
+            
+            for (var i = 0; i < this.length; i++) {
+                callback.call(thisArg,this[i], i, this);
+            }
+        };
+
+        let arrayL = [1,2,3]
+
+        arrayL.myForEach(function(value, index, array) {
+            console.log(this + ": " + value);
+        }, "dd");
+
+
+        function debounce(func,wait,immediate) {
+            let timeout = null;
+            return function() {
+                const context = this;
+                const args = arguments;
+                let now = immediate && !timeout
+                clearTimeout(timeout);
+                timeout = setTimeout(function() {
+                    timeout = null;
+                    !immediate ? func.call(context,args): null;
+                },wait);
+                now ? func.call(context,args) : null;
+            }
+        }
+    </script>
+</body>
+</html>
