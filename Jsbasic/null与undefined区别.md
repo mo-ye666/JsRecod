@@ -20,3 +20,11 @@ undefined典型用法是：
 2.调用函数时吗，应该提供的参数没有提供，该参数等于undefined
 3.对象没有赋值的属性，改属性的值为undefined
 4.函数没有返回值时，默认返回undefined。
+
+```js
+	function getType(obj) {
+		let type = type obj;
+		if(type != "obj") return type;
+		return Object.prototype.toString.call(type).replace(/^[Object (\S+)\]$/,'$1')
+	}
+```

@@ -96,6 +96,88 @@ promise的then方法接受两个参数：
 * 当promise成功执行时，所有onFulfilled需按照注册顺序依次回调
 * 当promise被拒接执行时，所有的onRejected需按照其注册顺序依次回调
 
+#### class实现
+```js
+class myPromise {
+	constructor(executor) {
+		this.state = 'padding';
+		this.value = undefined;
+		this.error = undefined;
+		this.resolveCallbacks = [];
+		this.rejectCallbacks = [];
+		const resolve = (value) => {
+			if(this.state === 'padding') {
+				this.state = 'fulfilled';
+				this.value = value;
+				this.resolveCallbacks.forEach(callback => callback(this.value))
+			}
+		}
+		const reject = (error) => {
+			if(this.state === 'padding') {
+				this.state = 'rejected';
+				this.error = error;
+				this.rejectCallbacks.forEach(callback => callback(this.error))
+			}
+		}
+		try {
+			executor(resolve,reject)
+		} catch(error) {
+			reject(error)
+		}
+	}
+	then(onrResolve,onReject){
+		return new myPromise((resolve,reject) => {
+			const resolveHandle = (value) => {
+				try {
+					const result = onResolve(value);
+					if(result instanceof myPromise){
+						result.then(resolve,reject);
+					} else {
+						resolve(result);
+					}
+				} catch(error) {
+					reject(error)
+				}
+			}
+			const rejectHandle = (error) => {
+				try {
+					const result = onReject(error);
+					if(result instanceof myPromise) {
+						result.then(resolve,reject);
+					} else {
+						resolve(result)
+					}
+				} catch(error) {
+					reject(error)
+				}
+			}
+			if(this.state === 'fulfilled') {
+				resolveHandle(this.value);
+			} else if(this.state === 'rejected') {
+				rejectHandle(this.error);
+			} else {
+				this.resolveCallbacks.push(resolveHandle);
+				this.rejectCallbacks.push(rejectHandle);
+			}
+		})
+	}
+	catch(onReject){
+		this.then(undefined,onReject)
+	}
+
+	static reslove(value) {
+		return new MyPromise((resolve) => {
+			resolve(value)
+		})
+	}
+	static reject(error) {
+		return new Mypromise((resolve,reject) => {
+			reject(error)
+		})
+	}
+}
+<!-- 
+#### 实现简易Promise满足A+规范
 ```js
 const EMUN = {
 	PENDING = 'pending',
@@ -103,9 +185,53 @@ const EMUN = {
 	REJECTED = 'rejected'
 }
 
-const resolvePromise = (x,promise2,reslove,reject) => {
-	if(x === promise2) reject(new TypeError('类型错误'))
+function MyPromise(executor) {
+	this.state = 'pending';
+	this.value = undefined;
+	this.reason = undefined;
+	this.onFulfilledCallbacks = [];
+	this.onRejectedCallbacks = [];
+	const reslove = (value) => {
+		if(this.state === 'pending') {
+			this.state = 'fulfilled';
+			this.value = value;
+			this.onFulfilledCallbacks.push(callback => callback(this.value));
+		}
+	}
+	const reject = (reason) => {
+		if(this.state === "pedding") {
+			this.state = 'rejected';
+			this.reason = reason;
+			this.onRejectedCallbacks.push(callback => callback(this.reason));
+		}
+	}
+	try {
+		executor(resolve,reject)
+	} catch(e) {
+		reject(e);
+	}
 }
-```
+MyPromise.prototype.then = function(onFulfilled,onRejected) {
+	onFulfilled = typeof onFulfilled === "function" ? onFulfilled : value => value;
+	onRejected = typeof onRejected === "function" ? onRejected : reason => {
+		throw reason;
+	}
+}
 
+MyPromise.prototype.catch = function(onRejected) {
+	return this.then(null,onRejected)
+}
 
+MyPromise.prototype.finally = function(onFinally) {
+	return this.then(
+		value => {
+			onFinally();
+			return value;
+		},
+		reason => {
+			onFinally();
+			return reason;
+		}
+	)
+} 
+```-->

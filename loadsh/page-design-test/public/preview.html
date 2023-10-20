@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>低代码编辑平台-预览</title>
+  <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet">
+  <link href="/low_code_editors/src/styles/index.css" rel="stylesheet">
+  <link href="//at.alicdn.com/t/font_2316694_d9478ry6b.css" rel="stylesheet">
+
+
+
+  <!-- <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_2316694_6axhrly3bbc.css"> -->
+  <script src="./static/vue.min.js"></script>
+  <script src="./static/vue-router.js"></script>
+  <!--    <script src="https://lib.baomitu.com/element-ui/2.13.2/index.js"></script>-->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      padding: 10px;
+      height: 100vh;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+    }
+
+    input,
+    textarea {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+    }
+
+    .el-table-column--selection .cell {
+      padding: 0px !important;
+    }
+
+
+    .custom-tree-node {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      padding-right: 8px;
+    }
+
+    [class*=" p-icon-"],
+    [class^=p-icon-] {
+      font-family: "p_font_family" !important;
+      speak: none;
+      font-style: normal;
+      font-weight: 400;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      vertical-align: baseline;
+      display: inline-block;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    [class*=p-icon-]+span {
+      margin-left: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>抱歉，javascript被禁用，请开启后重试。</strong>
+  </noscript>
+  <div id="previewApp" style="height:100%" class="flex-col flex-grow"></div>
+</body>
+
+</html>

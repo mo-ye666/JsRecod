@@ -1,0 +1,61 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+input, textarea {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+
+.el-scrollbar__wrap {
+  box-sizing: border-box;
+  overflow-x: hidden !important;
+  margin-bottom: 0 !important;
+}
+
+
+
+.el-scrollbar__view {
+  overflow-x: hidden;
+}
+
+.el-rate {
+  display: inline-block;
+  vertical-align: text-top;
+}
+
+.el-upload__tip {
+  line-height: 1.2;
+}
+
+[class*=" p-icon-"], [class^=p-icon-] {
+  font-family: "p_font_family" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[class*=p-icon-]+span {
+  margin-left: 5px;
+}
+
+.el-table-column--selection .cell {
+  padding: 10px;
+}
+.el-date-editor .el-range-input, .el-date-editor .el-range-separator, .el-input__inner, .el-radio__label,
+.el-radio, .el-radio--medium.is-bordered .el-radio__label,.el-divider__text {
+  font-size: inherit !important;
+  color: inherit !important;
+}
