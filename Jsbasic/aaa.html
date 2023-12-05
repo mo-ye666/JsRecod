@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1,2,3];
+        let arr2 = [2,3,4];
+        Object.defineProperty(arr,{
+            value:{
+                '0':1,
+                '1':2,
+                length:2
+            },
+            writable: true
+        },{
+            get() {
+                console.log('获取第一个元素')
+                return this._0
+            },
+            set(val) {
+                console.log('设置元素')
+                this._0 = val;
+            }
+        })
+        arr[0] = 'abc';
+        let newProxy = new Proxy(arr2,{
+            get(target,key,receiver) {
+                console.log('get',key)
+                return Reflect.get(target,key,receiver)
+            },
+            set(target,key,value,receiver) {
+                console.log('set',key,value)
+                return Reflect.set(target,key,value,receiver)
+            }
+        })
+        console.log(newProxy[0])
+    </script>
+</body>
+</html>
